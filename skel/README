@@ -1,0 +1,21 @@
+In aceasta tema am inceput prin a citi datele din fisierele de input si a imi 
+crea taskMap clase pentru fiecare fisier si corespunzator fragmentSize-ului dat ca
+input.
+Dupa aceasta am creat n workeri care sunt invocati sa execute taskMap-urile create 
+inainte si acestia returneaza munca facuta intr-un set ce contine elemente de tip
+ReduceResults pentru etapa urmatoare.
+Primii n workeri deschid fisierele distribuite acestora prin taskMap-uri (cu bufferReader),
+citesc fragmentSize octeti din fiserele respective de la offset-ul acestora. Acum apar doua
+cazuri: offset 0 si oricare alt offset. Singura diferenta dintre ele este ca pentru offset 0
+nu mai este necesara verificarea daca am un cuvant peste care trebuie sa sar. In ambele cazuri
+am verificat daca mai trebuie adaugat inca un cuvant care a fost citit partial, iar apoi am
+separat tot ce am citit si pus intr-un array care contine doar cuvinte (fara separatori). 
+In continuare am, cat timp mai am cuvinte in array, verific daca acum cuvantul curent este cel
+mai lung, este la fel de lung cu cel mai lung, a mai fost pana acum trecut in dictionar.
+Dupa ce primii n workeri au terminat de lucru, ii opresc si apoi pornesc alti n workeri 
+care sa efectueze taskurile de tip Reduce. Ei trebuie sa combine tot ce au facut primii n
+workeri, adica sa combine toate array-urile de cele mai lungi cuvinte, apoi sa combine toate
+dictionarele care numara lungimea si aparitia cuvintelor.  Dupa care trebuie sa calculeze rank-ul
+fiecarui fisier.
+Dupa ce au terminat de lucru, acum inchid acesti workeri, ordonez cu array sort rangurile elementelor, 
+si apoi le scriu in fisierul de out.
