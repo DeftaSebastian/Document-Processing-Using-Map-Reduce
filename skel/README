@@ -10,7 +10,7 @@ cazuri: offset 0 si oricare alt offset. Singura diferenta dintre ele este ca pen
 nu mai este necesara verificarea daca am un cuvant peste care trebuie sa sar. In ambele cazuri
 am verificat daca mai trebuie adaugat inca un cuvant care a fost citit partial, iar apoi am
 separat tot ce am citit si pus intr-un array care contine doar cuvinte (fara separatori). 
-In continuare am, cat timp mai am cuvinte in array, verific daca acum cuvantul curent este cel
+In continuare, cat timp mai am cuvinte in array, verific daca acum cuvantul curent este cel
 mai lung, este la fel de lung cu cel mai lung, a mai fost pana acum trecut in dictionar.
 Dupa ce primii n workeri au terminat de lucru, ii opresc si apoi pornesc alti n workeri 
 care sa efectueze taskurile de tip Reduce. Ei trebuie sa combine tot ce au facut primii n
